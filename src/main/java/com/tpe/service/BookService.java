@@ -5,6 +5,8 @@ import com.tpe.domain.Book;
 import com.tpe.exceptions.BookNotFoundException;
 import com.tpe.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +54,20 @@ public class BookService {
         existingBook.setAuthor(bookDTO.getAuthor());
         existingBook.setPublicationDate(bookDTO.getPublicationDate());
         bookRepository.save(existingBook);
+
+    }
+
+    public Page<Book> getAllBookWithPage(Pageable pageable) {
+        return bookRepository.findAll(pageable);
+    }
+
+    public List<Book> getBooksByAuthor(String author) {
+        List<Book> bookList = bookRepository.findByAuthorWithJPQL(author);
+        if (bookList.isEmpty())
+            throw new BookNotFoundException("Yazara ait kitap bulunamadi");
+
+
+        return bookList;
 
     }
 }
