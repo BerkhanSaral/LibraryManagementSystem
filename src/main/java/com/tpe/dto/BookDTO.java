@@ -1,4 +1,4 @@
-package com.tpe.DTO;
+package com.tpe.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

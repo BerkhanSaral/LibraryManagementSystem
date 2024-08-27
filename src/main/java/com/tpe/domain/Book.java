@@ -1,5 +1,6 @@
 package com.tpe.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,6 +33,11 @@ public class Book {
 
     @Column(nullable = false)
     private String publicationDate;
+
+    @ManyToOne
+    @JsonIgnore
+    private Owner owner;
+
 
     @Override
     public String toString() {
